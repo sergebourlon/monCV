@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>CV Serge Bourlon – Accordéon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+
+  <style>
+
+    /* Évite le saut dû à l'apparition/disparition de la scrollbar verticale */
+    
+    .accordion-collapse {
+      transition: height 0.4s ease;  /* Uniformise la durée d'ouverture */
+      overflow: hidden;              /* Évite le débordement de contenu */
+      will-change: height;           /* Optimise le rendu */
+    }
+
+
+    .accordion-body {
+      animation: fadeIn 0.3s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    
+    html {
+      overflow-y: scroll;
+    }
+
+
+    body {
+      background-color: #f0f0f0;
+      padding: 40px 0;
+      font-family: Arial, sans-serif;
+    }
+    .cv-container {
+      max-width: 950px;
+      margin: auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+    }
+    .accordion-button {
+      font-size: 1.4rem;
+      /* background-color: #118374; */
+      background-color: #2d70a7;
+      color: #ffffff;
+     
+      /* background-color: rgb(158, 200, 247); */
+    }
+
+    .accordion-body {
+      background-color: #fff;
+    }
+    .row-identite {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    /* .photo-profil {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3); 
+    } */
+
+    /* Sélecteur pour l'intérieur du carrousel */
+    #photoCarousel .carousel-inner {
+      width: 180px;                           /* Largeur fixe de l’élément */
+      height: 180px;                          /* Hauteur fixe de l’élément */
+      border-radius: 50%;                     /* Donne une forme ronde au carrousel */
+      overflow: hidden;                       /* Cache les parties de l’image qui dépassent de la bordure ronde */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Ajoute une ombre noire subtile autour du cercle pour un effet 3D */
+    }
+
+    /* Sélecteur pour les images à l'intérieur du carrousel */
+    #photoCarousel .carousel-inner img {
+      width: 100%;                            /* Largeur de l’image à 100% pour remplir l’espace disponible */
+      height: 100%;                           /* Hauteur de l’image à 100% pour remplir l’espace */
+      object-fit: cover;                      /* Recadre l’image pour qu’elle couvre entièrement le cercle, sans déformation */
+      border-radius: 50%;                     /* Rondeur des coins de l’image pour qu’elle suive la forme ronde du carrousel */
+    }
+
+/* Ralentir la vitesse du fade de toutes les images du carrousel */
+/*.carousel-fade .carousel-item {
+  transition: opacity 3s ease-in-out; /* Change la durée à ta convenance 
+}*/
+
+    .coordonnees ul {
+      padding-left: 20px;
+    }
+    .coordonnees ul li {
+      margin-bottom: 3px;
+    }
+
+    .titre-bleu {
+      font-size: 1.8rem;        /* Taille du texte (ajuste si besoin) */
+      color: #0066cc;           /* Bleu foncé par exemple */
+      margin-top: 20px;
+    }
+
+    .reseau-icon {
+      width: 48px;              /* Largeur fixe de l’icône */
+      height: 48px;             /* Hauteur fixe de l’icône */
+      line-height: 48px;        /* Aligne verticalement l’icône au centre */
+      text-align: center;       /* Centre horizontalement le contenu */
+      font-size: 1.7rem;        /* Taille de l’icône */
+      border-radius: 50%;       /* Rend le fond parfaitement rond */
+      display: inline-block;    /* Permet de fixer les dimensions tout en restant en ligne */
+    } 
+
+    .icon-x {
+      font-size: 1.5rem;
+      color: #000000;
+      position: relative;
+      top: 3px;
+    }
+
+
+    /* Cache les chevrons Bootstrap par défaut */
+    .accordion-button::after {
+    display: none !important;      /* Masque l’icône par défaut (chevron ▼) avec priorité absolue */
+    }
+
+    /* Style du bouton quand il est fermé : affiche + */
+    .accordion-button.collapsed::before {
+      content: "+";                  /* Ajoute un symbole + comme contenu du bouton fermé */
+      font-size: 2.2rem;             /* Augmente la taille du + pour une meilleure visibilité */
+      color: white;                  /* Donne au + une couleur blanche (souvent sur fond bleu foncé) */
+      font-weight: bold;            /* Rend le symbole + plus épais */
+      position: absolute;           /* Permet de positionner précisément l’élément dans le bouton */
+      right: 25px;                  /* L’éloigne de 25px du bord droit du bouton */
+      top: 50%;                     /* Centre verticalement par rapport au bouton */
+      transform: translateY(-50%);  /* Ajuste pour que le centre du + soit aligné verticalement */
+    }
+
+    /* Style du bouton quand il est ouvert : affiche – */
+    .accordion-button:not(.collapsed)::before {
+      content: "–";                 /* Affiche un tiret (moins) quand le panneau est ouvert */
+      font-size: 2.2rem;            /* Taille du symbole – identique à celle du + */
+      color: black;                 /* Couleur noire pour un bon contraste sur fond clair */
+      font-weight: bold;           /* Rend le symbole – plus visible */
+      position: absolute;          /* Positionnement manuel comme pour le + */
+      right: 25px;                  /* Même position horizontale que le + */
+      top: 50%;                     /* Centre verticalement */
+      transform: translateY(-50%);  /* Aligne parfaitement au centre vertical */
+    }
+
+  /* Cible les éléments <ul>, <li> et <p> situés à l'intérieur des accordéons */
+    .accordion-body ul,        /* Sélecteur pour les balises <ul> (listes à puces) */
+    .accordion-body li,        /* Sélecteur pour les balises <li> (éléments de liste) */
+    .accordion-body p {        /* Sélecteur pour les balises <p> (paragraphes) */
+  font-size: 1.2rem !important;  /* Définit la taille de police à 1.2 rem et la force avec !important */
+    }
+
+
+
+  </style>
+</head>
+<body>
+
+<div class="cv-container">
+  <h1 class="text-center mb-4">Curriculum Vitae – Serge Bourlon</h1>
+
+  <div class="accordion" id="cvAccordion">
+
+    <!-- 1. Identité & Contact -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
+          1. Identité & Contact
+        </button>
+      </h2>
+
+
+      <div id="collapse1" class="accordion-collapse collapse" data-bs-parent="#cvAccordion">
+        <div class="accordion-body">
+
+            <!-- Bannière en haut du contenu -->
+            <img src="Images/IDENTITE.jpg" alt="Bannière expériences" style="width: 100%; border-radius: 8px; margin-bottom: 20px;">
+
+
+          <div class="row-identite">
+
+            <!-- <img src="sbourlon.jpg" alt="Serge" class="photo-profil"> -->
+             <!-- Carrousel fade pour les photos -->
+            <div id="photoCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+              <div class="carousel-inner rounded-circle overflow-hidden" style="width: 180px; height: 180px;">
+                <div class="carousel-item active">
+                <img src="Images/sbourlon.jpg" class="d-block w-100" alt="Serge Bourlon">
+            </div>
+                <div class="carousel-item">
+                <img src="Images/serge2.jpg" class="d-block w-100" alt="Serge Bourlon 2">
+            </div>
+            <div class="carousel-item">
+              <img src="Images/serge3.jpg" class="d-block w-100" alt="Serge Bourlon 3">
+            </div>
+            <div class="carousel-item">
+              <img src="Images/serge4.jpg" class="d-block w-100" alt="Serge Bourlon 4">
+          </div>
+        </div>
+      </div>
+
+            <!-- Coordonnées à droite -->
+            <div class="coordonnees">
+              <ul>
+                <li><strong>Nom :</strong> Bourlon</li>
+                <li><strong>Prénom :</strong> Serge</li>
+                <li><strong>Adresse :</strong> Private (RGPD)</li>
+                <li><strong>Nationalité :</strong> Belge</li>
+                <li><strong>Téléphone :</strong> Private (RGPD)</li>
+                <li><strong>Email :</strong> serge.bourlon@hotmail.fr</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Profession -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
+          2. Profession
+        </button>
+      </h2>
+      <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#cvAccordion">
+        <div class="accordion-body">
+
+             <!-- Bannière en haut du contenu -->
+            <img src="Images/PROFESSION.jpg" alt="Bannière expériences" style="width: 100%; border-radius: 8px; margin-bottom: 20px;">
+
+          <h2>Fonctionnaire au Service Public de Wallonie – SPW EER</h2>
+          <ul>
+            <li><strong>Rang :</strong> Niveau D</li>
+            <li><strong>Grade :</strong> Adjoint principal statutaire</li>
+            <li><strong>Résidence :</strong> Place de la Wallonie, 1 – 5100 Jambes</li>
+            <li><strong>Email professionnel :</strong> serge.bourlon@spw.wallonie.be</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Expériences professionnelles -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
+          3. Expériences professionnelles
+        </button>
+      </h2>
+      <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#cvAccordion">
+        <div class="accordion-body">
+
+            <!-- Bannière en haut du contenu -->
+            <img src="Images/EXPPROF.jpg" alt="Bannière expériences" style="width: 100%; border-radius: 8px; margin-bottom: 20px;">
+
+        
+
+          <h2 class="titre-bleu">Service public de Wallonie</h2>
+      <p><strong>2025... :</strong><br>
+      <strong>SPW EER - Département de l'Emploi et de la Formation professionnelle</strong><br>
+      Fonction : Support administratif général pour le département</p>
+      <ul>
+        <li>Assistance administrative quotidienne pour le département, avec une attention particulière à la gestion des dossiers et à l’organisation interne</li>
+        <li>Coordination des tâches administratives afin d'assurer la fluidité des processus et l'alignement avec les objectifs du département</li>
+      </ul>
+
+      <p><strong>2024-2025 :</strong><br>
+      <strong>SPW TLPE – Département de l’Énergie (mutation temporaire)</strong><br>
+      Fonction : Gestionnaire de dossiers primes énergies</p>
+      <ul>
+        <li>Gestion et suivi des dossiers de primes énergies, en particulier pour les primes chauffage (poêles biomasses, pompes à chaleur, chauffages biomasses) via l’application PrimeLE et les passerelles vers la BCED.</li>
+        <li>Analyse des factures et vérification de l’éligibilité des appareils de chauffage à l’aide de bases de données et de documents législatifs.</li>
+        <li>Rédaction de courriers, gestion des mails, et prise de contacts téléphoniques avec les demandeurs pour fournir des informations détaillées et résoudre les demandes.</li>
+      </ul>
+
+      <p><strong>2005-2024 :</strong><br>
+      <strong>SPW EER – Département de l’Emploi et de la Formation professionnelle</strong><br>
+      Fonction : Gestionnaire de dossiers Plan de Convention de Premier Emploi (CPE)</p>
+      <ul>
+        <li>Suivi administratif et financier des dossiers CPE dans des domaines variés tels que l'action sociale, la santé, le tourisme et les communes</li>
+        <li>Analyse des factures et vérification de l’éligibilité des appareils de chauffage à l’aide de bases de données et de documents législatifs.</li>
+        <li>Soutien en matière de dossiers de subventions facultatives (via l’application Caliope) pour des associations, communes et gestion centre-ville.</li>
+      </ul>
+
+      <h2 class="titre-bleu">Wallonie Fiscalité – Adjoint administratif (CDI)</h2>
+      <p><strong>2003-2005 :</strong><br>
+      <strong>Radio-TV Redevance (ex DGO7) - Service perception de la redevance radio-TV</strong><br>
+      Fonction : Adjoint administratif contractuel</p>
+      <ul>
+        <li>Gestion et suivi des dossiers d’enrôlement et de perception des taxes radio-TV via l’application Athena</li>
+        <li>Interface avec les citoyens pour le suivi des paiements, la résolution des litiges et la gestion des dossiers administratifs</li>
+      </ul>
+
+      <h2 class="titre-bleu">Police fédérale – Assistant administratif (CDD)</h2>
+      <p><strong>2001-2003 :</strong><br>
+      <strong>Etat-Major de la Police fédérale à Etterbeek</strong><br>
+      Fonction : Assistant administratif contractuel à la direction de la documentation</p>
+      <ul>
+        <li>Support administratif auprès des bibliothécaires et gestion des publications internes</li>
+        <li>Classement, encodage et mise à jour des publications et documents dans le système interne</li>
+      </ul>
+
+      <h2 class="titre-bleu">SPF Justice – Employé administratif contractuel (CDD)</h2>
+      <p><strong>1999-2001 :</strong><br>
+      <strong>Cour d'Appel de Bruxelles</strong><br>
+      Fonction : Employé au greffe de la Cour d’Appel de Bruxelles</p>
+      <ul>
+        <li>Préparation des dossiers pour les avocats</li>
+        <li>Rédaction et gestion de documents officiels en respectant les délais légaux et les exigences des tribunaux</li>
+      </ul>
+
+      <strong>Tribunal de Commerce de Namur</strong>
+      <p><strong>1995-1999 :</strong><br>
+      Fonction : Employé au greffe du registre de commerce de Namur</p>
+      <ul>
+        <li>Encodage et gestion des dossiers papiers du registre de commerce de Namur</li>
+        <li>Mise à jour des registres avec une attention particulière aux détails administratifs et à la conformité des documents</li>
+      </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 4. Résumé expérience acquise -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4">
+          4. Résumé de l'expérience professionnelle acquise
+        </button>
+      </h2>
+      <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#cvAccordion">
+        <div class="accordion-body">
+
+            <!-- Bannière en haut du contenu -->
+            <img src="Images/RESUME.jpg" alt="Bannière expériences" style="width: 100%; border-radius: 8px; margin-bottom: 20px;">
+
+          <p>Mon parcours professionnel s'étend sur plus de 25 ans dans le secteur <strong>public, tant au fédéral qu’ à la Région wallonne</strong>, où j'ai occupé des rôles clés dans <strong>l'administration</strong>, réglementations <strong>juridique et financière</strong>, ainsi que dans des domaines techniques. </p>
+          <p>J'ai acquis une expertise dans la gestion de <strong>dossiers administratifs via des applications professionnelles</strong>, l’encodage dans des tableaux Excel, rédaction d’actes administratifs (arrêtés ministériels), le suivi <strong>financier</strong> de projets, et le traitement de données, tout en ayant également occupé des fonctions <strong>techniques </strong>dans la gestion de <strong>systèmes et de bases de données.</strong></p>
+          <p>Ma carrière reflète une <strong></strong>évolution constante, marquée par des responsabilités croissantes, allant de l'encodage administratif au suivi de projets plus complexes, notamment dans le domaine des primes énergies, des programmes de soutien à l'emploi et de subventions facultatives.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Etudes - formations -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5">
+          5. Etudes - Formations
+        </button>
+      </h2>
+      <div id="collapse5" class="accordion-collapse collapse" data-bs-parent="#cvAccordion">
+        <div class="accordion-body">
+
+            <!-- Bannière en haut du contenu -->
+            <img src="Images/ETUDES.jpg" alt="Bannière expériences" style="width: 100%; border-radius: 8px; margin-bottom: 20px;">
+
+
+          <h2 class="titre-bleu"> Certificat d'enseignement secondaire supérieur</h2>
+            <ul>
+                <li><strong>Orientation :Transition technique</strong> 
+                    <ul>
+                        <li> Option : Sciences expérimentales et techniques
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+         <h2 class="titre-bleu">Enseignement supérieur pédagogique de type court</h2>
+            <ul>
+                <li> <strong>Orientation :pédagogique</strong> 
+                    <ul>
+                        <li> Option : Instituteur primaire (non sanctionné par un diplôme)
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+        <h2 class="titre-bleu">Formation en comptabilité et secrétariat</h2>
+        <p>Formation dispensée par le FOREM de Namur</p>
+
+        <h2 class="titre-bleu">Unités d'enseignement supérieur</h2>
+          <ul>
+                <li> <strong>Orientation : bachelier en Informatique et Systèmes</strong> 
+                    <br><br>
+                    <ul>
+                        <li> 2022-2023 : Formations certifiées Cisco CCNA 1 & 2
+                            <ul>
+                                <li>CCNA 1 : Base des réseaux IP, DNS, TCP/IP, routage de base.</li>
+                                <li> CCNA 2 : Routing/Switching : Vlans, intervlans, OISP, NAT, routage statique et dynamique</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <br>
+                    <ul>
+                        <li> 2023-2024 : Initiation à la programmation
+                            <ul>
+                                <li> Logique algorithmique, initiation à la programmation langage Python</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <br>
+                    <ul>
+                        <li> 2024-2025 : Base de la programmation
+                            <ul>
+                                <li> Base de la programmation langage Python. Portails Github (branches) et Anvil Build (formulaires , applications mathématiques).</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        
+        <h2 class="titre-bleu">Formation en ligne Développer web Full Stack</h2>
+        <p>Développement web (HTML, CSS, Bootstrap, Django/Python) et déploiement local de projets par scripts Batch. Formation qualifiante en ligne par Udemy.</p>
+
+        <h2 class="titre-bleu">Formation Ecole d'Administration Publique (EAP)</h2>
+            <ul>
+                <li>Formations en <strong>droit budgétaire</strong>, <strong>droit administratif</strong> et <strong>marchés publics</strong> (EAP)</li>
+                
+                <li>Bonne maîtrise des procédures <strong>administratives</strong> et <strong>financières</strong> publiques.</li>
+            </ul>
+          </div>
+      </div>
+    </div>
+
+    <!-- 6. Compétences générales -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6">
+          6. Compétences générales
+        </button>
+      </h2>
+      <div id="collapse6" class="accordion-collapse collapse" data-bs-parent="#cvAccordion">
+        <div class="accordion-body">
+
+            <!-- Bannière en haut du contenu -->
+            <img src="Images/COMPETENCES.jpg" alt="Bannière expériences" style="width: 100%; border-radius: 8px; margin-bottom: 20px;">
+
+
+          <h2 class="titre-bleu">  Déontologie du service public :</h2>
+            <ul>
+                <li>Respect des principes déontologiques dans la gestion des services publics.</li>
+                <li>Aide aux usagers et opérateurs : approche éthique et orientée vers la satisfaction des usagers, avec un sens du service public.</li>
+                <li>Contrôle rigoureux et transparence dans la gestion des dossiers et des informations. </li>
+            </ul>
+
+         <h2 class="titre-bleu">Esprit d’analyse structuré et rigoureux :</h2>
+           <ul>
+                <li>Modélisation de systèmes complexes : réseaux, serveurs web, processus administratifs.</li>
+                <li>Orientation résultats, souci du détail et autonomie forte.</li>
+            </ul>
+
+        <h2 class="titre-bleu">Qualités humaines et relationnelles :</h2>
+            <ul>
+                <li>Esprit d’équipe affirmé, apprécié pour la collaboration active et l'entraide avec les collègues.</li>
+                <li>Curiosité intellectuelle et motivation constante pour l'acquisition de nouvelles compétences dans des domaines variés</li>
+            </ul>
+
+        <h2 class="titre-bleu">Compétences multimédia :</h2>
+               <ul>
+                <li>Montage multimédia : création, édition et retouche de vidéos et photos.</li>
+            </ul>
+
+          <h2 class="titre-bleu"> Compétences bureautiques :</h2>
+            <ul>
+                <li>Maîtrise des logiciels Office 365 : Word, Excel, Outloo365, outils collaboratifs (Teams, etc)</li>
+            </ul>
+
+        <h2 class="titre-bleu">Formation Ecole d'Administration Publique (EAP)</h2>
+            <ul>
+                <li>Formations en <strong>droit budgétaire</strong>, <strong>droit administratif</strong> et <strong>marchés publics</strong> (EAP)</li>
+                
+                <li>Bonne maîtrise des procédures <strong>administratives</strong> et <strong>financières</strong> publiques.</li>
+            </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 7. Traits personnalité -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse7">
+          7. Traits de la personnalité
+        </button>
+      </h2>
+      <div id="collapse7" class="accordion-collapse collapse" data-bs-parent="#cvAccordion">
+        <div class="accordion-body">
+
+            <!-- Bannière en haut du contenu -->
+            <img src="Images/PERSONNALITE.jpg" alt="Bannière expériences" style="width: 100%; border-radius: 8px; margin-bottom: 20px;">
+
+
+          <h2 class="titre-bleu">   Curiosité intellectuelle et soif d'apprendre : </h2>
+            <ul>
+               <li>Toujours motivé pour découvrir <strong>de nouvelles compétences</strong> et enrichir mes connaissances, que ce soit dans les <strong>domaines techniques</strong> (informatique, réseaux, développement web) ou dans des sujets variés tels que <strong>la science, la politique, les sports et le cinéma.</strong></li>
+              <br>
+              <li>Mon intérêt pour l'actualité me permet de rester informé sur les évolutions mondiales et d'approfondir constamment ma compréhension des enjeux contemporains.</li>
+            </ul>
+
+         <h2 class="titre-bleu"> Engagement envers le climat et l'environnement : </h2>
+           <ul>
+                <li>Très préoccupé par les enjeux du <strong>changement climatique</strong> et <strong>l'impact environnemental</strong>, je suis activement engagé dans des actions concrètes pour réduire mon empreinte écologique. </li>
+                <br>
+                <li>Je suis particulièrement soucieux de tout ce qui touche à la durabilité et à l'économie circulaire, et je cherche constamment à intégrer ces principes dans ma vie professionnelle et personnelle</li>
+            </ul>
+
+        <h2 class="titre-bleu"> Esprit d’équipe et collaboration : </h2>
+            <ul>
+                <li>Appréciant particulièrement le travail en <strong>collaboration</strong>, j'aime apporter mon aide à mes collègues et contribuer activement à la réussite collective. Mon approche est orientée vers l’<strong>entraide</strong> et le <strong>partage de compétences</strong>, car je crois fermement que c’est en apprenant <strong>ensemble</strong> que l’on progresse</li>
+            </ul>
+
+        <h2 class="titre-bleu"> Orientation vers les résultats et souci du détail : </h2>
+               <ul>
+                <li>Que ce soit dans mes projets techniques, administratifs ou multimédia, je mets un point d'honneur à travailler avec <strong>rigueur</strong> et <strong>efficacité</strong>. J’accorde une attention particulière à chaque détail, afin de garantir des résultats de qualité et conformes aux attentes</li>
+            </ul>
+
+          <h2 class="titre-bleu"> Ouverture d’esprit et dynamisme : </h2>
+            <ul>
+                <li>Mon intérêt pour les <strong>voyages</strong> et l'<strong>aventure</strong> témoigne de ma capacité à sortir de ma zone de confort et à m’adapter à des contextes nouveaux. Ces expériences renforcent ma capacité à évoluer dans des environnements internationaux et multiculturels</li>
+            </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Screening du profil professionnel global -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse8">
+          8. Screening du profil professionnel global
+        </button>
+      </h2>
+      <div id="collapse8" class="accordion-collapse collapse" data-bs-parent="#cvAccordion">
+        <div class="accordion-body">
+
+            <!-- Bannière en haut du contenu -->
+            <img src="Images/SCREENING.jpg" alt="Bannière expériences" style="width: 100%; border-radius: 8px; margin-bottom: 20px;">
+      
+
+          <li>Une intelligence logique et fonctionnelle très développée</li>
+          <li>Un contact très aisé avec les usagers et les opérateurs</li>
+          <li>Une capacité d’apprentissage rapide</li>
+          <li>Une autonomie réelle</li>
+          <li>Une très bonne capacité rédactionnelle (courriers, mails etc)</li>
+          <li>Un esprit d’analyse et de synthèse digne de profils techniques avancés</li>
+          <br>
+          <p><strong>Je serait particulièrement à l'aise dans des postes de :</strong></p>
+
+          <ol style="padding-left: 1.2rem;">
+            <li>Gestionnaire de dossiers en matière de subventions et primes diverses.</li>
+            <li>Dans l’analyse de documents financiers tels que des factures.</li>
+            <li>Dans l’utilisation d’applications et logiciels de traitement de dossiers tels que WBFIN.</li>
+            <li>Rôle de correspondant informatique local (CIL).</li>
+            <li>Collaborer dans une cellule infographiste et de gestion de sites internet et intranet (publications d’articles, montages photos, montages vidéos, mise à jour site internet ou intranet, etc).</li>
+            <li>Développeur web frontend, backend, CMS ou full-stack.</li>
+            <li>Coordinateur (ou collaborateur) de projet technique et digital.</li>
+          </ol>
+  
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. Activités - Loisirs -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse9">
+          9. Activités - Loisirs
+        </button>
+      </h2>
+      <div id="collapse9" class="accordion-collapse collapse" data-bs-parent="#cvAccordion">
+        <div class="accordion-body">
+
+            <!-- Bannière en haut du contenu -->
+            <img src="Images/LOISIRS.jpg" alt="Bannière expériences" style="width: 100%; border-radius: 8px; margin-bottom: 20px;">
+
+          <ul style="padding-left: 15px;">
+              <li style="text-align: justify;">
+              Pratique régulière du <strong>tennis</strong>, du <strong>VTT</strong>, du <strong>vélo route</strong> et de la <strong>course à pied</strong> en mode loisir : 
+              Ces <strong>activités sportives</strong> témoignent de ma discipline, persévérance et esprit d'équipe.
+              </li>
+            <br>
+              <li style="text-align: justify;">
+              Passion pour les <strong>voyages</strong> et l'<strong>aventure</strong>: Curieux et ouvert aux découvertes, j'apprécie les <strong>expériences enrichissantes</strong> et les <strong>défis personnels</strong> à travers mes voyages. 
+              Cela me permet de nourrir mon <strong>esprit d'initiative</strong> et de développer une <strong>vision globale</strong> en rencontrant des cultures variées.
+              </li>
+            <br>
+              <li style="text-align: justify;">
+            Passion pour les domaines liés à l'<strong>informatique et au multimédia</strong> : Toujours à la recherche de nouvelles technologies, je me tiens informé des dernières innovations et m'investis dans des projets personnels pour développer mes compétences en <strong>programmation, développement web et montage multimédia.</strong>
+              </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. Partager -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse10">
+          10. Partager
+        </button>
+      </h2>
+      <div id="collapse10" class="accordion-collapse collapse" data-bs-parent="#cvAccordion">
+        <div class="accordion-body">
+
+            <!-- Bannière en haut du contenu -->
+            <img src="Images/PARTAGER.jpg" alt="Bannière expériences" style="width: 100%; border-radius: 8px; margin-bottom: 20px;">
+
+<div class="text-center">
+  <h2 class="titre-bleu">Partager mon CV</h2>
+  <div class="d-flex justify-content-center gap-4 mt-3">
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://ton-cv.com" target="_blank" class="text-primary fs-3" title="Partager sur Facebook">
+    <i class="bi bi-facebook text-primary"></i>
+  </a>
+
+ <!-- X (ancien Twitter) -->
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://ton-cv.com" target="_blank" class="text-info fs-3" title="Partager sur LinkedIn">
+    <i class="bi bi-linkedin"></i>
+  </a>
+
+<a href="https://x.com/share?url=https://ton-cv.com" target="_blank" title="Partager sur X">
+  <i class="bi bi-twitter-x icon-x"></i>
+</a>
+
+  <a href="https://api.whatsapp.com/send?text=Découvrez%20mon%20CV%20:%20https://ton-cv.com" target="_blank" class="text-success fs-3" title="Partager sur WhatsApp">
+    <i class="bi bi-whatsapp"></i>
+  </a>
+
+  <a href="mailto:?subject=Mon%20CV&body=Voici%20le%20lien%20vers%20mon%20CV%20:%20https://ton-cv.com" class="text-danger fs-3" title="Envoyer par email">
+    <i class="bi bi-envelope-fill"></i>
+  </a>
+
+</div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
+
+
